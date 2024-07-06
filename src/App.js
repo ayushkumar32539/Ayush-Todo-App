@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
+import TaskReducer from './Reducers/TaskReducers';
+import TaskInput from './Component/TaskInput';
+import TaskList from './Component/TaskList';
 
-function App() {
-  return (
+const rootReducer = combineReducers({
+  tasks: TaskReducer
+});
+
+const store = createStore(rootReducer);
+
+const App = () => (
+  <Provider store={store}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TaskInput />
+      <TaskList />
     </div>
-  );
-}
+  </Provider>
+);
 
 export default App;
